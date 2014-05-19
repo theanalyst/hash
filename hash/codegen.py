@@ -1,4 +1,5 @@
 import ast
+
 from functools import partial, wraps
 
 DEFAULT_INDENTATION = 2
