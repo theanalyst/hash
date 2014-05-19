@@ -46,6 +46,10 @@ class HyCodeGenerator(ast.NodeVisitor):
             else:
                 self.result.append(item)
 
+    def conditional_write(self, *stuff):
+        if stuff[-1] is not None:
+            self.write(*stuff)
+
     def render_source(self):
         return "".join(self.result)
 
