@@ -88,3 +88,13 @@ class HyCodeGenerator(ast.NodeVisitor):
 
     def visit_Num(self,node):
         self.write(repr(node.n))
+
+    def visit_alias(self,node):
+        self.write(node.name)
+        self.conditional_write(" :as ", node.asname)
+
+    @enclose("()",newline=True)
+    def visit_Import(self,node):
+        self.write('import ')
+        self.generic_list(node.names)
+
