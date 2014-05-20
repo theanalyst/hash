@@ -1,0 +1,4 @@
+-r requirements-travis.txt
+#test tools
+nose
+tox
