@@ -2,6 +2,10 @@
 hast
 ===============================
 
+.. image:: https://travis-ci.org/theanalyst/hast.png?branch=master
+        :target: https://travis-ci.org/theanalyst/hast
+
+
 Hy from AST
 
 * Free software: BSD license
