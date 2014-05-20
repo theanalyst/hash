@@ -2,8 +2,8 @@
 hast
 ===============================
 
-.. image:: https://travis-ci.org/theanalyst/hast.png?branch=master
-        :target: https://travis-ci.org/theanalyst/hast
+.. image:: https://travis-ci.org/theanalyst/hash.png?branch=master
+        :target: https://travis-ci.org/theanalyst/hash
 
 
 Hy from AST
