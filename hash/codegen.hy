@@ -3,6 +3,9 @@
 (require hash.utils)
 (require hash.template)
 
+(visitor str node
+         node)
+
 (visitor ast.Module node
          (.join "" (genexpr (visit stmt) [stmt node.body])))
 
@@ -12,10 +15,10 @@
 
 (visitor ast.Assign node
          (.join "\n" (genexpr
-                      (t!setv (visit target) (visit node.value))
+                      (t!setv target node.value)
                       [target node.targets])))
 
 (visitor ast.AugAssign node
          (t!sexp (aug-op node.op)
-                 (visit node.target) (visit node.value)))
+                 node.target node.value))
 
