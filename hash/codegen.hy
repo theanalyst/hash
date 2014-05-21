@@ -1,5 +1,5 @@
 (import ast
-        [hash.utils [visit]])
+        [hash.utils [visit getop]])
 (require hash.utils)
 (require hash.template)
 
@@ -14,4 +14,8 @@
          (.join "\n" (genexpr
                       (t!setv (visit target) (visit node.value))
                       [target node.targets])))
+
+(visitor ast.AugAssign node
+         (t!sexp (aug-op node.op)
+                 (visit node.target) (visit node.value)))
 
