@@ -1,7 +1,9 @@
 (import ast)
-(import [utils [visit]])
-(require utils)
-(require template)
+
+(import [hash.utils [visit]])
+
+(require hash.utils)
+(require hash.template)
 
 (visitor ast.Module node
          (.join "" (genexpr (visit stmt) [stmt node.body])))
