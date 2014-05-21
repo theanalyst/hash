@@ -27,7 +27,7 @@ setup(
     package_data = {
         'hash' : ['*.hy'],
     },
-    install_requires=['hy >= 0.10.0' ],
+    install_requires=['hy >= 0.10.0', 'singledispatch >= 3.4'],
     license= "BSD",
     keywords='hash',
     classifiers=[
