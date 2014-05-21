@@ -24,7 +24,10 @@ setup(
     author_email='abhishek.lekshmanan@gmail.com',
     url='https://github.com/theanalyst/hash',
     packages= find_packages(exclude=['tests']),
-    
+    package_data = {
+        'hash' : ['*.hy'],
+    },
+    install_requires=['hy >= 0.10.0' ],
     license= "BSD",
     keywords='hash',
     classifiers=[
