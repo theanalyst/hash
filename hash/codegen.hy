@@ -3,8 +3,7 @@
 (require hash.utils)
 (require hash.template)
 
-(visitor str node
-         node)
+(visitor str obj obj) ; When obj is a a str, return it
 
 (visitor ast.Module node
          (.join "" (genexpr (visit stmt) [stmt node.body])))
@@ -14,11 +13,8 @@
 (visitor ast.Num node (repr node.n))
 
 (visitor ast.Assign node
-         (.join "\n" (genexpr
-                      (t!setv target node.value)
+         (.join "\n" (genexpr (t!setv target node.value)
                       [target node.targets])))
 
 (visitor ast.AugAssign node
-         (t!sexp (aug-op node.op)
-                 node.target node.value))
-
+         (t!sexp (aug-op node.op) node.target node.value))
