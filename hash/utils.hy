@@ -30,4 +30,5 @@
   (get *ops* op))
 
 (defmacro aug-op [obj]
-  `(+ (getop (. ~obj  --class-- --name--)) "="))
+  `(do (import [hash.utils [getop]])
+    (+ (getop (. ~obj  --class-- --name--)) "=")))
