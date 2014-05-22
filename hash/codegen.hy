@@ -1,5 +1,5 @@
 (import ast
-        [hash.utils [visit getop]])
+        [hash.utils [visit]])
 (require hash.utils)
 (require hash.template)
 
