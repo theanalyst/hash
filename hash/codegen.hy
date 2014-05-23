@@ -1,9 +1,13 @@
 (import ast
-        [hash.utils [visit]])
+        [hash.utils [visit]]
+        [hy._compat [str_type]])
 (require hash.utils)
 (require hash.template)
 
-(visitor str obj obj) ; When obj is a a str, return it
+
+(visitor str obj obj)
+
+(visitor str_type obj obj) ; Handle unicode for py2
 
 (visitor list node-list ; Returns list of space seperated items
          (.join " " (genexpr (visit item) [item node-list])))
