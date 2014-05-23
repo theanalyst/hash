@@ -6,3 +6,8 @@
 
 (defmacro t!import [&rest body]
   `(t!sexp "import" ~@body))
+
+(defmacro hylist [&rest items]
+  `(let [[l (list (map visit [~@items]))]]
+     (unless (or (empty? l) (= l ""))
+       (+ "[" (.join " " l) "]"))))

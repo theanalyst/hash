@@ -28,3 +28,18 @@
          (t!sexp (aug-op node.op) node.target node.value))
 
 (visitor ast.Import node (t!import node.names))
+
+;; TODO atm relative imports are not supported..add dots for levels
+;; once that lands in hy, also this is kind of a hack as
+;; from math import floor,sqrt as s has to be translated in hy
+;; as "(import [math [floor] [sqrt :as s]])"
+;; Also need to figure out not creating spaces when empty item is encounterd
+(visitor ast.ImportFrom node
+         (let [[module-imports
+               (list (filter (fn [it] (nil? it.asname)) node.names))]
+              [alias-imports
+               (list (filter (fn [it] (not (nil? it.asname))) node.names))]]
+           (when node.module
+             (t!import
+              (hylist node.module (hylist module-imports)
+                      alias-imports)))))
