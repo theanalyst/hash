@@ -25,13 +25,13 @@
 	   node.name))
 
 (visitor ast.Assign node
-         (.join "\n" (genexpr (t!setv target node.value)
+         (.join "\n" (genexpr (t-setv target node.value)
                       [target node.targets])))
 
 (visitor ast.AugAssign node
-         (t!sexp (aug-op node.op) node.target node.value))
+         (t-sexp (aug-op node.op) node.target node.value))
 
-(visitor ast.Import node (t!import node.names))
+(visitor ast.Import node (t-import node.names))
 
 ;; TODO atm relative imports are not supported..add dots for levels
 ;; once that lands in hy, also this is kind of a hack as
@@ -44,6 +44,6 @@
               [alias-imports
                (list (filter (fn [it] (not (nil? it.asname))) node.names))]]
            (when node.module
-             (t!import
+             (t-import
               (hylist node.module (hylist module-imports)
                       alias-imports)))))
