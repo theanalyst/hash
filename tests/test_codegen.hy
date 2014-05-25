@@ -12,3 +12,7 @@
   (assert (= "(import [foo :as bar])" (hyc "import foo as bar")))
   (assert (= "(import [math [sqrt] [floor :as f]])"
              (hyc "from math import sqrt, floor as f"))))
+
+;; TODO write more assert tests once conditionals are implemented
+(defn test-assert []
+  (assert (= "(assert True)" (hyc "assert True"))))

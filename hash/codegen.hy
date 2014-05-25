@@ -47,3 +47,9 @@
              (t-import
               (hylist node.module (hylist module-imports)
                       alias-imports)))))
+
+(visitor ast.Assert node
+         (if node.msg
+           (t-sexp "assert" node.test node.msg)
+           (t-sexp "assert" node.test)))
+
