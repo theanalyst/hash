@@ -1,9 +1,11 @@
 (import ast
+        sys
         [hash.utils [visit]]
         [hy._compat [str_type]])
 (require hash.utils)
 (require hash.template)
 
+(def PY34 (>= sys.version_info (, 3 4)))
 
 (visitor str obj obj)
 
@@ -16,6 +18,8 @@
          (.join "" (genexpr (visit stmt) [stmt node.body])))
 
 (visitor ast.Name node node.id)
+
+(when PY34 (visitor ast.NameConstant node (str node.value)))
 
 (visitor ast.Num node (repr node.n))
 
