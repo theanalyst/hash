@@ -16,3 +16,7 @@
 ;; TODO write more assert tests once conditionals are implemented
 (defn test-assert []
   (assert (= "(assert True)" (hyc "assert True"))))
+
+(defn test-list []
+  (assert (= "[1 2 3]" (hyc "[1,2,3]")))
+  (assert (= "[]" (hyc "[]"))))

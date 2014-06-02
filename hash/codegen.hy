@@ -57,3 +57,9 @@
            (t-sexp "assert" node.test node.msg)
            (t-sexp "assert" node.test)))
 
+(visitor ast.Expr node
+         (visit node.value))
+
+(visitor ast.List node
+         (hylist node.elts))
+
