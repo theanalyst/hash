@@ -14,10 +14,10 @@
 (defvisitor str_type [obj] obj)   ; Handle unicode for py2
 
 (defvisitor list [node-list]     ; Returns list of space seperated items
-         (.join " " (genexpr (visit item) [item node-list])))
+  (.join " " (genexpr (visit item) [item node-list])))
 
 (defvisitor ast.Module [node]
-         (.join "" (genexpr (visit stmt) [stmt node.body])))
+  (.join "" (genexpr (visit stmt) [stmt node.body])))
 
 (defvisitor ast.Name [node] node.id)
 
@@ -26,16 +26,16 @@
 (defvisitor ast.Num [node] (repr node.n))
 
 (defvisitor ast.alias [node]
-	 (if node.asname
-	   (.format "[{0} :as {1}]" node.name node.asname)
-	   node.name))
+  (if node.asname
+    (.format "[{0} :as {1}]" node.name node.asname)
+    node.name))
 
 (defvisitor ast.Assign [node]
-         (.join "\n" (genexpr (t-setv target node.value)
-                      [target node.targets])))
+  (.join "\n" (genexpr (t-setv target node.value)
+                       [target node.targets])))
 
 (defvisitor ast.AugAssign [node]
-         (t-sexp (aug-op node.op) node.target node.value))
+  (t-sexp (aug-op node.op) node.target node.value))
 
 (defvisitor ast.Import [node] (t-import node.names))
 
@@ -45,25 +45,25 @@
 ;; as "(import [math [floor] [sqrt :as s]])"
 ;; Also need to figure out not creating spaces when empty item is encounterd
 (defvisitor ast.ImportFrom [node]
-         (let [[module-imports
-               (list (filter (fn [it] (nil? it.asname)) node.names))]
-              [alias-imports
-               (list (filter (fn [it] (not (nil? it.asname))) node.names))]]
-           (when node.module
-             (t-import
-              (hylist node.module (hylist module-imports)
-                      alias-imports)))))
+  (let [[module-imports
+         (list (filter (fn [it] (nil? it.asname)) node.names))]
+        [alias-imports
+         (list (filter (fn [it] (not (nil? it.asname))) node.names))]]
+    (when node.module
+      (t-import
+       (hylist node.module (hylist module-imports)
+               alias-imports)))))
 
 (defvisitor ast.Assert [node]
-         (if node.msg
-           (t-sexp "assert" node.test node.msg)
-           (t-sexp "assert" node.test)))
+  (if node.msg
+    (t-sexp "assert" node.test node.msg)
+    (t-sexp "assert" node.test)))
 
 (defvisitor ast.Expr [node]
-         (visit node.value))
+  (visit node.value))
 
 (defvisitor ast.List [node]
-         (hylist node.elts))
+  (hylist node.elts))
 
 (defvisitor ast.Tuple [node]
-         (t-sexp "," (list node.elts)))
+  (t-sexp "," (list node.elts)))
