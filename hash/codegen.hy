@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; eval: (font-lock-add-keywords nil '(("defvisitor\\| => " (0 'font-lock-keyword-face)))); -*-
+
 (import ast
         sys
         [hash.utils [visit]]
