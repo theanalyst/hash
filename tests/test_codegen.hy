@@ -20,3 +20,7 @@
 (defn test-list []
   (assert (= "[1 2 3]" (hyc "[1,2,3]")))
   (assert (= "[]" (hyc "[]"))))
+
+(defn test-tuple []
+  (assert (= "(, 1 2)" (hyc "(1,2)")))
+  (assert (= "(, )" (hyc "()"))))

@@ -63,3 +63,5 @@
 (visitor ast.List node
          (hylist node.elts))
 
+(visitor ast.Tuple node
+         (t-sexp "," (list node.elts)))
