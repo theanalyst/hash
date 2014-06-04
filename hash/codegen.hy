@@ -2,6 +2,7 @@
 
 (import ast
         sys
+        [itertools [chain]]
         [hash.utils [visit]]
         [hy._compat [str_type]])
 (require hash.utils)
@@ -24,6 +25,8 @@
 (when PY34 (defvisitor ast.NameConstant [node] (str node.value)))
 
 (defvisitor ast.Num [node] (repr node.n))
+
+(defvisitor ast.Str [node] (repr node.s))
 
 (defvisitor ast.alias [node]
   (if node.asname
@@ -67,3 +70,6 @@
 
 (defvisitor ast.Tuple [node]
   (t-sexp "," (list node.elts)))
+
+(defvisitor ast.Dict [node]
+  (t-dict (list (.from-iterable chain (zip node.keys node.values)))))

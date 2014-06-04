@@ -24,3 +24,7 @@
 (defn test-tuple []
   (assert (= "(, 1 2)" (hyc "(1,2)")))
   (assert (= "(, )" (hyc "()"))))
+
+(defn test-dicts []
+  (assert (= "{\"one\" 1 \"two\" 2}" (hyc "{\"one\":1,\"two\":2}")))
+  (assert (= "{}" (hyc "{}"))))
