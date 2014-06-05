@@ -3,6 +3,18 @@
 
 (defmacro hyc [e] `(visit (ast.parse ~e)))
 
+;; Base Types
+(defn test-empty []
+  (assert (= "" (hyc ""))))
+
+(defn test-str []
+  (assert (= "'This is a string!'" (hyc "'This is a string!'"))))
+
+(defn test-num []
+  (assert (= "10" (hyc "10")))
+  (assert (= "3.14" (hyc "3.14"))))
+
+;; Expressions
 (defn test-assign []
   (assert (= "(setv a 10)" (hyc "a=10")))
   (assert (= "(+= a 10)" (hyc"a+=10"))))
