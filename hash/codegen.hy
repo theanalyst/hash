@@ -24,7 +24,10 @@
 
 (when PY34 (defvisitor ast.NameConstant [node] (str node.value)))
 
-(defvisitor ast.Num [node] (repr node.n))
+;; Ideally we should use repr(node.n) for ast.Num..but this breaks in PY26
+;; as repr of floating numbers are represented as an approximation
+;; The repr representation of float 3.xx was backported back to 2.7
+(defvisitor ast.Num [node] (str node.n))
 
 (defvisitor ast.Str [node] (repr node.s))
 
