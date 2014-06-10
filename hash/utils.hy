@@ -1,4 +1,4 @@
-(import [singledispatch [singledispatch]])
+(import [hash._compat [singledispatch]])
 
 (with-decorator singledispatch
   (defn visit [ast-node]

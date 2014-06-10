@@ -13,6 +13,11 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     sys.exit()
 
+if sys.version_info <= (3,3):
+    install_requires=['hy >= 0.10.0', 'singledispatch >= 3.4']
+else:
+    install_requires=['hy >= 0.10.0']
+
 readme = open('README.rst').read()
 
 setup(
@@ -27,7 +32,7 @@ setup(
     package_data = {
         'hash' : ['*.hy'],
     },
-    install_requires=['hy >= 0.10.0', 'singledispatch >= 3.4'],
+    install_requires = install_requires,
     license= "BSD",
     keywords='hash',
     classifiers=[
