@@ -13,7 +13,7 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     sys.exit()
 
-if sys.version_info <= (3,3):
+if sys.version_info < (3,4):
     install_requires=['hy >= 0.10.0', 'singledispatch >= 3.4']
 else:
     install_requires=['hy >= 0.10.0']
