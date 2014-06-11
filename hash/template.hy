@@ -1,16 +1,16 @@
-(defmacro t-sexp [fn &rest body]
+(defmacro hy-sexp [fn &rest body]
   `(+ "("  ~fn " " (.join " " (list (map visit [~@body]))) ")"))
 
-(defmacro t-dict [&rest body]
+(defmacro hy-dict [&rest body]
   `(+ "{"  (.join " " (list (map visit [~@body]))) "}"))
 
-(defmacro t-setv [&rest body]
-  `(t-sexp "setv" ~@body))
+(defmacro hy-setv [&rest body]
+  `(hy-sexp "setv" ~@body))
 
-(defmacro t-import [&rest body]
-  `(t-sexp "import" ~@body))
+(defmacro hy-import [&rest body]
+  `(hy-sexp "import" ~@body))
 
-(defmacro hylist [&rest items]
+(defmacro hy-list [&rest items]
   `(let [[l (list (map visit [~@items]))]]
      (unless (or (empty? l) (= l ""))
        (+ "[" (.join " " l) "]"))))

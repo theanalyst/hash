@@ -35,13 +35,13 @@
     node.name))
 
 (defvisitor ast.Assign [node]
-  (.join "\n" (genexpr (t-setv target node.value)
+  (.join "\n" (genexpr (hy-setv target node.value)
                        [target node.targets])))
 
 (defvisitor ast.AugAssign [node]
-  (t-sexp (aug-op node.op) node.target node.value))
+  (hy-sexp (aug-op node.op) node.target node.value))
 
-(defvisitor ast.Import [node] (t-import node.names))
+(defvisitor ast.Import [node] (hy-import node.names))
 
 ;; TODO atm relative imports are not supported..add dots for levels
 ;; once that lands in hy, also this is kind of a hack as
@@ -54,23 +54,23 @@
         [alias-imports
          (list (filter (fn [it] (not (nil? it.asname))) node.names))]]
     (when node.module
-      (t-import
-       (hylist node.module (hylist module-imports)
+      (hy-import
+       (hy-list node.module (hy-list module-imports)
                alias-imports)))))
 
 (defvisitor ast.Assert [node]
   (if node.msg
-    (t-sexp "assert" node.test node.msg)
-    (t-sexp "assert" node.test)))
+    (hy-sexp "assert" node.test node.msg)
+    (hy-sexp "assert" node.test)))
 
 (defvisitor ast.Expr [node]
   (visit node.value))
 
 (defvisitor ast.List [node]
-  (hylist node.elts))
+  (hy-list node.elts))
 
 (defvisitor ast.Tuple [node]
-  (t-sexp "," (list node.elts)))
+  (hy-sexp "," (list node.elts)))
 
 (defvisitor ast.Dict [node]
-  (t-dict (list (.from-iterable chain (zip node.keys node.values)))))
+  (hy-dict (list (.from-iterable chain (zip node.keys node.values)))))
