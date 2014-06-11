@@ -4,11 +4,9 @@
         sys
         [itertools [chain]]
         [hash.utils [visit]]
-        [hy._compat [str_type]])
+        [hy._compat [str_type PY34]])
 (require hash.utils)
 (require hash.template)
-
-(def PY34 (>= sys.version_info (, 3 4)))
 
 (defvisitor str [obj] obj)
 
